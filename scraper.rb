@@ -10,6 +10,7 @@ Capybara.default_driver = :poltergeist
 doctors = []
 
 CSV.foreach("./data/zipcodes.csv", headers: false) do |row|
+  # BCBS Only Supports Providers in CA without selecting a plan
   next unless row[3] == "CA"
   
   zipcode = row[0].gsub(/"/, '')
