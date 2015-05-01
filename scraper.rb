@@ -14,22 +14,23 @@ CSV.foreach("./data/zipcodes.csv", headers: false) do |row|
   
   zipcode = row[0].gsub(/"/, '')
   puts "Processing Zip Code: #{zipcode}"
+
   begin
   
     visit "https://www.blueshieldca.com/fap/app/search.html"
 
-    page.fill_in "location", with: zipcode
+    fill_in "location", with: zipcode
 
-    page.find("#findNowButton").click
+    find("#findNowButton").click
 
-    page.find("#agreedCheckbox").click
+    find("#agreedCheckbox").click
 
-    page.find("#continueButtonImg").click
+    find("#continueButtonImg").click
 
     sleep 10 # TODO: Continue after page loads
 
-    10.times do
-      page.all(".accAddSection").each do |doctor|
+    20.times do
+      all(".accAddSection").each do |doctor|
         name = doctor.find("span.docName").text
         specialization = doctor.find(".docSpecialization").text
         address = doctor.find(".docAddress").text
